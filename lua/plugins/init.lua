@@ -21,6 +21,7 @@ return {
       ensure_installed = {
         "lua",
         "python",
+        "rust",
       },
     },
   },
@@ -52,6 +53,27 @@ return {
     event = "VeryLazy",
     config = function()
       require "configs.aerial_config"
+    end,
+  },
+
+  -- Cargo crates auto completion
+  {
+    "saecki/crates.nvim",
+    ft = { "toml" },
+    event = "BufRead Cargo.toml",
+    config = function()
+      require("crates").setup {
+        completion = {
+          cmp = {
+            enabled = true,
+          },
+        },
+      }
+      require("cmp").setup.buffer {
+        sources = {
+          { name = "crates" },
+        },
+      }
     end,
   },
 }

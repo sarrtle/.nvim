@@ -11,6 +11,9 @@
 
 ### Python plugins
 - basedpyright, ruff, black
+### Rust plugins
+- rust-analyzer
+- You need to install rust with **rustup** to get the rust-std.
 
 ### Notes and features
 1. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Both python and Web development works.

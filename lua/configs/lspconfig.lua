@@ -50,3 +50,31 @@ lspconfig.ruff.setup {
     },
   },
 }
+
+-- RUST: diagnostics, static checker, auto completion
+lspconfig.rust_analyzer.setup {
+  filetypes = { "rust" },
+  on_attach = on_attach,
+  on_init = on_init,
+  capabalities = capabalities,
+  mason=false,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+        buildScripts = {
+          enable = true,
+        },
+      },
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      procMacro = {
+        enable = true,
+      },
+    },
+  },
+}
