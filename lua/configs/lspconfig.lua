@@ -50,6 +50,33 @@ lspconfig.ruff.setup {
   },
 }
 
+-- RUST: diagnostics, static checker, auto completion
+lspconfig.rust_analyzer.setup {
+  filetypes = { "rust" },
+  on_attach = on_attach,
+  on_init = on_init,
+  capabalities = capabalities,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+        buildScripts = {
+          enable = true,
+        },
+      },
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      procMacro = {
+        enable = true,
+      },
+    },
+  },
+}
+
 -- HTML: Abbreviation expansion
 lspconfig.emmet_language_server.setup {
   filetypes = {

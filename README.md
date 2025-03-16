@@ -13,6 +13,9 @@
 - basedpyright, ruff, black
 ### Web development plugins
 - typescript-language-server, svelte-language-server, tailwindcss-language-server, prettierd, emmet-language-server, html, cssls
+### Rust plugins
+- rust-analyzer
+- You need to install rust with **rustup** to get the rust-std.
 
 ### Notes and features
 1. **Auto close tags on react html and svelte**: whenever you write any html tags, it will be automatically close. `<p>This is a paragraph</p>`

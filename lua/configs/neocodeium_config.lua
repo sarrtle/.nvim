@@ -4,7 +4,7 @@
 local M = {}
 
 M.filetypes =
-  { "lua", "python", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte", "html", "css" }
+  { "lua", "python", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte", "html", "css", "rust" }
 
 -- State holder for statusline
 M.status = ""

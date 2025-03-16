@@ -43,6 +43,8 @@ M.mason = {
     -- For Lua
     "lua-language-server",
     "stylua",
+    -- For rust
+    "rust-analyzer",
   },
 }
 
