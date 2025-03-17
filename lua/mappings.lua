@@ -47,6 +47,6 @@ end, { desc = "Neocodeium clear current suggestions" })
 vim.keymap.set("n", "<C-a>", function()
   require("aerial").toggle { focus = false, direction = "right" }
 end, { desc = "Aerial toggle" })
-vim.keymap.set("n", "<C-b>", function()
+vim.keymap.set("n", "nt", function()
   require("aerial").nav_toggle()
 end, { desc = "Aerial nav toggle" })

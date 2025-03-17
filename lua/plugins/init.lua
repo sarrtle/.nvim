@@ -116,4 +116,13 @@ return {
       }
     end,
   },
+
+  -- smooth scrolling
+  {
+    "karb94/neoscroll.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "configs.neoscroll"
+    end,
+  },
 }

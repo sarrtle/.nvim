@@ -31,4 +31,11 @@ aerial.setup {
   open_automatic = false,
 
   -- other options are already default, no need to implement
+  nav = {
+    keymaps = {
+      -- overwrite tab keymap on aerial buffer to avoid switching
+      -- to other tapsjjjthe code in the current aerial buffer
+      ["<Tab>"] = "actions.jump",
+    },
+  },
 }
