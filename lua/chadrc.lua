@@ -26,6 +26,12 @@ M.ui = {
       end,
     },
   },
+  cmp = {
+    style = "default",
+    format_colors = {
+      tailwind = true,
+    },
+  },
 }
 
 M.mason = {
