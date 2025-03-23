@@ -9,6 +9,45 @@ local capabalities = configs.capabalities
 
 local lspconfig = require "lspconfig"
 
+-- -- LUA: diagnostics, static checker, auto completion, lazyvim support.
+-- --      Only enable this incase the plugin won't work or abandoned.
+-- -- Notes: This is slow and loading a lot of files, might optimize this in the future.
+-- lspconfig.lua_ls.setup {
+--   on_init = on_init,
+--   on_attach = on_attach,
+--   capabalities = capabalities,
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--         version = "LuaJIT",
+--       },
+--       diagnostics = {
+--         -- Get the language server to recognize the `vim` global
+--         globals = { "vim" },
+--       },
+--       workspace = {
+--         -- Make the server aware of Neovim runtime files
+--         library = {
+--           vim.env.VIMRUNTIME,
+--           -- Add LazyVim plugins
+--           vim.fn.stdpath "data" .. "/lazy",
+--           -- Add your plugin directory
+--           -- ~/path/to/custom/plugins
+--         },
+--         checkThirdParty = false,
+--       },
+--       completion = {
+--         callSnippet = "Replace",
+--       },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = {
+--         enable = false,
+--       },
+--     },
+--   },
+-- }
+
 -- PYTHON: diagnostics, static checker, auto completion
 lspconfig.basedpyright.setup {
   filetypes = { "python" },

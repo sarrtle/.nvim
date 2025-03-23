@@ -125,4 +125,26 @@ return {
       require "configs.neoscroll"
     end,
   },
+
+  -- UI plugin
+  {
+    "MunifTanjim/nui.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "customtest.ai"
+    end,
+  },
+
+  -- Allowing development inside Neovim
+  -- lua_ls will have autocompletion for plugins
+  -- Note: This is a fast version than the lspconfig setup
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "LazyVim", words = { "LazyVim" } },
+      },
+    },
+  },
 }
