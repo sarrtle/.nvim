@@ -17,6 +17,15 @@
 - rust-analyzer
 - You need to install rust with **rustup** to get the rust-std.
 
+### Tools
+1. AI assistant (ProtoAI): A prototype AI assistant builtin for this project
+- create an account and get an API from deepinfra
+- run `ProtoAiSetToken`, ENTER, paste your deepinfra token. `ProtoAiDeleteToken` to delete the API file. The api file is saved at your `~HOME/.deepinfra_token`.
+- default model is Deepseek R1-Turbo
+- tap `tt` in your keyboard to open the chat window
+- `td` to close the chat window
+- `tu` to navigate to the response window, `tt` for user input again, `tr` for clearing all session--you need to tap ENTER, `tl` and `th` for history navigation.
+
 ### Notes and features
 1. **Auto close tags on react html and svelte**: whenever you write any html tags, it will be automatically close. `<p>This is a paragraph</p>`
 2. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Both python and Web development works.
