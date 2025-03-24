@@ -176,19 +176,21 @@ delete_button:map("n", "<CR>", function()
   local length = #group_message
   vim.api.nvim_buf_set_lines(history_text.bufnr, 0, -1, false, { tostring(MessageTurn) .. "/" .. tostring(length) })
   vim.api.nvim_buf_set_lines(response_popup.bufnr, 0, -1, false, {})
+  vim.api.nvim_buf_set_lines(input_popup.bufnr, 0, -1, false, {})
 end)
 
 right_button:map("n", "<CR>", function()
   local messages = api_request.group_messages(MessageHistory)
   local message_length = #messages
 
-  MessageTurn = MessageTurn + 1
+  print(MessageTurn, message_length)
 
   -- early return on unsupported pagination
-  if MessageTurn > message_length then
-    MessageTurn = message_length
+  if MessageTurn == message_length then
     return
   end
+
+  MessageTurn = MessageTurn + 1
 
   local user_input = messages[MessageTurn][1].content
   local ai_response = messages[MessageTurn][2].content
@@ -226,13 +228,14 @@ left_button:map("n", "<CR>", function()
   local messages = api_request.group_messages(MessageHistory)
   local message_length = #messages
 
-  MessageTurn = MessageTurn - 1
+  print(MessageTurn, message_length)
 
   -- early return on unsupported pagination
-  if MessageTurn < 0 then
-    MessageTurn = 0
+  if MessageTurn == 0 or MessageTurn == 1 then
     return
   end
+
+  MessageTurn = MessageTurn - 1
 
   local user_input = messages[MessageTurn][1].content
   local ai_response = messages[MessageTurn][2].content
