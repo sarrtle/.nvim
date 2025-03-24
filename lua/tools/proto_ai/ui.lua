@@ -14,7 +14,7 @@ local response_popup = Popup {
   enter = false,
   focusable = true,
   border = {
-    padding = { top = 0, left = 1, bottom = 0, right = 1 },
+    padding = { top = 1, left = 1, bottom = 0, right = 1 },
     style = "rounded",
     text = { top = "[AI Response]", top_align = "right" },
   },
@@ -137,33 +137,115 @@ input_popup:map("n", "<CR>", function()
   vim.api.nvim_buf_set_lines(input_popup.bufnr, 0, -1, false, {})
   vim.api.nvim_buf_set_lines(response_popup.bufnr, 0, -1, false, {})
 
+  local is_thinking = false
+  local think_buffer = ""
+  local think_line = nil -- Tracks the line number of our thinking display
+
   api_request.get_ai_response_async_stream(MessageHistory, function(chunk)
-    -- Get current buffer state
+    -- Handle thinking state management
+    if is_thinking then
+      think_buffer = think_buffer .. chunk
+      local think_end = think_buffer:find "</think>"
+
+      if think_end then
+        -- Process final thinking content
+        local think_content = think_buffer:sub(1, think_end - 1)
+        ProcessThinkContent(think_content)
+
+        -- Exit thinking mode
+        is_thinking = false
+        think_buffer = ""
+
+        -- Remove thinking line
+        if think_line then
+          vim.api.nvim_buf_set_lines(response_popup.bufnr, think_line, think_line + 1, false, {})
+          think_line = nil
+        end
+      else
+        -- Process intermediate thinking content
+        ProcessThinkContent(think_buffer)
+      end
+    else
+      local think_start = chunk:find "<think>"
+      if think_start then
+        -- Split chunk into normal content and thinking content
+        local after_think = chunk:sub(think_start + #"<think>")
+
+        -- Enter thinking mode
+        is_thinking = true
+        think_buffer = after_think
+      else
+        -- Normal content processing
+        ProcessNormalChunk(chunk)
+      end
+    end
+  end, function(fullResponse)
+    api_request.add_ai_response(MessageHistory, fullResponse)
+    vim.schedule(function()
+      if response_popup.winid then
+        vim.api.nvim_set_current_win(response_popup.winid)
+      end
+    end)
+  end)
+
+  -- Helper function for normal content processing
+  function ProcessNormalChunk(chunk)
+    if #chunk == 0 then
+      return
+    end
+
     local line_count = vim.api.nvim_buf_line_count(response_popup.bufnr)
     local last_line = vim.api.nvim_buf_get_lines(response_popup.bufnr, -2, -1, false)[1] or ""
 
-    -- Merge chunk with existing content
+    if line_count == 1 then
+      -- trim new lines on before text like this: "\nHey"
+      chunk = chunk:gsub("^%s*\n", "")
+    end
+
+    -- Merge with last line and split
     local new_content = last_line .. chunk
     local lines = vim.split(new_content, "\n", { plain = true, trimempty = false })
 
-    -- Update buffer while preserving formatting
-    vim.api.nvim_buf_set_lines(
-      response_popup.bufnr,
-      line_count - 1, -- Start at last line
-      line_count, -- Replace existing last line
-      false,
-      lines
-    )
+    -- Update buffer
+    vim.api.nvim_buf_set_lines(response_popup.bufnr, math.max(0, line_count - 1), line_count, false, lines)
 
-    -- Optional: Auto-scroll if needed
-    vim.api.nvim_win_set_cursor(response_popup.winid, { line_count - 1 + #lines, 0 })
-  end, function(fullResponse)
-    api_request.add_ai_response(MessageHistory, fullResponse)
-    -- navigate to response buffer
-    vim.schedule(function()
-      vim.api.nvim_set_current_win(response_popup.winid)
-    end)
-  end)
+    -- Auto-scroll
+    if response_popup.winid then
+      vim.api.nvim_win_set_cursor(response_popup.winid, { line_count - 1 + #lines, 0 })
+    end
+  end
+
+  -- Helper function to process thinking content
+  function ProcessThinkContent(content)
+    -- Split into paragraphs (simple newline separation)
+    local paragraphs = vim.split(content:gsub("\r", ""), "\n")
+
+    for _, para in ipairs(paragraphs) do
+      if #para > 0 then
+        -- Extract first sentence or first line
+        local first_sentence = para:match "^([^%.!?\n]+[%.!?]?)" or para:match "^[^\n]+"
+        first_sentence = first_sentence:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
+
+        -- Create or update thinking line
+        local display_text = "... " .. first_sentence
+
+        if not think_line then
+          -- Add new thinking line
+          local line_count = vim.api.nvim_buf_line_count(response_popup.bufnr) - 1
+          vim.api.nvim_buf_set_lines(response_popup.bufnr, line_count, line_count, false, { display_text })
+          think_line = line_count
+        else
+          -- Update existing thinking line
+          vim.api.nvim_buf_set_lines(response_popup.bufnr, think_line, think_line + 1, false, { display_text })
+        end
+
+        -- Keep cursor on the thinking line
+        if response_popup.winid then
+          vim.api.nvim_win_set_cursor(response_popup.winid, { think_line + 1, #display_text })
+        end
+      end
+    end
+  end
 end)
 
 -- reset message history
@@ -182,8 +264,6 @@ end)
 right_button:map("n", "<CR>", function()
   local messages = api_request.group_messages(MessageHistory)
   local message_length = #messages
-
-  print(MessageTurn, message_length)
 
   -- early return on unsupported pagination
   if MessageTurn == message_length then
@@ -227,8 +307,6 @@ end)
 left_button:map("n", "<CR>", function()
   local messages = api_request.group_messages(MessageHistory)
   local message_length = #messages
-
-  print(MessageTurn, message_length)
 
   -- early return on unsupported pagination
   if MessageTurn == 0 or MessageTurn == 1 then
