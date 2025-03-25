@@ -184,6 +184,7 @@ input_popup:map("n", "<CR>", function()
     vim.schedule(function()
       if response_popup.winid then
         vim.api.nvim_set_current_win(response_popup.winid)
+        vim.cmd "stopinsert"
       end
     end)
   end)
@@ -275,6 +276,10 @@ right_button:map("n", "<CR>", function()
   local user_input = messages[MessageTurn][1].content
   local ai_response = messages[MessageTurn][2].content
 
+  -- remove content from <think> ... </think>
+  user_input = user_input:gsub("<think>.*</think>\n\n", "")
+  ai_response = ai_response:gsub("<think>.*</think>\n\n", "")
+
   -- apply to buffer
   local user_lines = vim.split(user_input, "\n", { plain = true, trimempty = false })
   vim.api.nvim_buf_set_lines(
@@ -317,6 +322,10 @@ left_button:map("n", "<CR>", function()
 
   local user_input = messages[MessageTurn][1].content
   local ai_response = messages[MessageTurn][2].content
+
+  -- remove content from <think> ... </think>
+  user_input = user_input:gsub("<think>.*</think>\n\n", "")
+  ai_response = ai_response:gsub("<think>.*</think>\n\n", "")
 
   -- apply to buffer
   local user_lines = vim.split(user_input, "\n", { plain = true, trimempty = false })

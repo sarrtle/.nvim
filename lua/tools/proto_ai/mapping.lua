@@ -5,7 +5,9 @@ local M = {}
 M.setup_mappings = function(main_layout, input_popup, response_popup, delete_button, left_button, right_button)
   -- open tool
   vim.keymap.set("n", "tt", function()
-    main_layout:show()
+    if input_popup.winid == nil then
+      main_layout:show()
+    end
     vim.api.nvim_set_current_win(input_popup.winid)
     vim.cmd "startinsert"
   end, { noremap = true })
