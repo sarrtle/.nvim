@@ -17,6 +17,13 @@
 - rust-analyzer
 - You need to install rust with **rustup** to get the rust-std.
 
+### Tools
+1. AI assistant: A prototype AI assistant builtin for this project
+- Requirements: tor service, please enable SocksPort and your tor service. Optionally you can enable ControlPort for automatic IP rotation but there is no authentication so it is not recommended. I recommend manually rotating your ip address with tor when you are experience blocking.
+- tap `tt` in your keyboard to open the chat window
+- `td` to close the chat window
+- `tu` to navigate to the response window, `tt` for user input again, `tr` for clearing all session--you need to tap ENTER, `tl` and `th` for history navigation.
+
 ### Notes and features
 1. **Auto close tags on react html and svelte**: whenever you write any html tags, it will be automatically close. `<p>This is a paragraph</p>`
 2. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Both python and Web development works.

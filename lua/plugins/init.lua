@@ -131,7 +131,8 @@ return {
     "MunifTanjim/nui.nvim",
     event = "VeryLazy",
     config = function()
-      require "customtest.ai"
+      -- load custom UI tools
+      require "tools.proto_ai"
     end,
   },
 
