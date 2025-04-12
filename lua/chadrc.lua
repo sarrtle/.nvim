@@ -42,7 +42,6 @@ M.mason = {
     "ruff",
     -- For Web Development
     "typescript-language-server",
-    "svelte-language-server",
     "tailwindcss-language-server",
     "prettierd",
     "emmet-language-server",
