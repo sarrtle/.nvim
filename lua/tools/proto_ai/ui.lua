@@ -4,7 +4,7 @@ local Popup = require "nui.popup"
 local mappings = require "tools.proto_ai.mappings"
 local system_prompt = require "tools.proto_ai.prompts"
 
--- check if system is windows
+-- import AI library
 local ai_response = require "tools.proto_ai.ai_response"
 
 -- important variables
@@ -205,23 +205,6 @@ local function done_cb(fullResponse)
   end)
 end
 
-function get_ai_response(this_model)
-  local cor = coroutine.create(function()
-    ai_response.generate_response(is_deep_thinking, this_model, create_messages(), chunk_cb, done_cb)
-  end)
-
-  -- Resume the coroutine repeatedly.
-  local function step()
-    local ok, err = coroutine.resume(cor)
-    if not ok then
-      print("Coroutine error: " .. tostring(err))
-    elseif coroutine.status(cor) ~= "dead" then
-      vim.schedule(step)
-    end
-  end
-  step()
-end
-
 ---@return table
 local function get_message_turns(messages)
   local group = {}
@@ -247,6 +230,42 @@ local function get_message_turns(messages)
   end
 
   return group
+end
+
+local function error_callback(_)
+  -- last user message
+  local last_user_message = end_to_end_conversation[#end_to_end_conversation]
+
+  -- remove the last user message
+  table.remove(end_to_end_conversation, #end_to_end_conversation)
+
+  -- calculate message history length
+  local length = #get_message_turns(create_messages())
+  message_turn = length
+
+  -- reset history text
+  vim.api.nvim_buf_set_lines(history_text.bufnr, 0, -1, false, { tostring(message_turn) .. "/" .. tostring(length) })
+
+  -- re add previous message
+  vim.api.nvim_buf_set_lines(input_popup.bufnr, 0, -1, false, { last_user_message.content })
+end
+
+function get_ai_response(this_model)
+  local cor = coroutine.create(function()
+    ai_response.generate_response(is_deep_thinking, this_model, create_messages(), chunk_cb, done_cb, error_callback)
+  end)
+
+  -- Resume the coroutine repeatedly.
+  local function step()
+    local ok, _ = coroutine.resume(cor)
+    if not ok then
+      -- will display unhandled error
+      error_callback()
+    elseif coroutine.status(cor) ~= "dead" then
+      vim.schedule(step)
+    end
+  end
+  step()
 end
 
 -- component mappings
