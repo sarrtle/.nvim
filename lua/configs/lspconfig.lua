@@ -118,19 +118,7 @@ lspconfig.rust_analyzer.setup {
 
 -- HTML: Abbreviation expansion
 lspconfig.emmet_language_server.setup {
-  filetypes = {
-    "css",
-    "eruby",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "less",
-    "sass",
-    "scss",
-    "pug",
-    "typescriptreact",
-    "svelte",
-  },
+  filetypes = { "css", "html", "javascript", "javascriptreact", "typescriptreact" },
   -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
   -- **Note:** only the options listed in the table are supported.
   init_options = {
@@ -162,13 +150,6 @@ lspconfig.ts_ls.setup {
   capabalities = capabalities,
 }
 
--- SVELTE: diagnostics and auto completion, with typescript support.
-lspconfig.svelte.setup {
-  on_init = on_init,
-  on_attach = on_attach,
-  capabalities = capabalities,
-}
-
 -- TAILWIND: tailwind css auto completion
 lspconfig.tailwindcss.setup {
   on_init = on_init,
@@ -177,6 +158,14 @@ lspconfig.tailwindcss.setup {
   -- remove hover capabilities because it throws `no information available`
   handlers = {
     ["textDocument/hover"] = function() end,
+  },
+  filetypes = { "css", "html", "javascript", "rust" },
+  settings = {
+    tailwindCSS = {
+      includeLanguages = {
+        rust = "html",
+      },
+    },
   },
 }
 
