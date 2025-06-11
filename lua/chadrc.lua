@@ -6,7 +6,11 @@
 local M = {}
 
 M.base46 = {
-  theme = "solarized_osaka",
+  -- there is no need for this anymore, themes will be managed
+  -- by the desktop system, feel free to change it anytime — but
+  -- pushing changes to the online repository will reflect your
+  -- theme changes if ever you used the default theme manager
+  theme = "onedark",
 
   -- hl_override = {
   -- Comment = { italic = true },
