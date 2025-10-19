@@ -7,7 +7,7 @@ local on_attach = configs.on_attach
 local on_init = configs.on_init
 local capabalities = configs.capabalities
 
-local lspconfig = require "lspconfig"
+local lspconfig = vim.lsp.config
 
 -- -- LUA: diagnostics, static checker, auto completion, lazyvim support.
 -- --      Only enable this incase the plugin won't work or abandoned.
@@ -49,21 +49,19 @@ local lspconfig = require "lspconfig"
 -- }
 
 -- PYTHON: diagnostics, static checker, auto completion
-lspconfig.basedpyright.setup {
+lspconfig.basedpyright = {
   filetypes = { "python" },
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
-  root_dir = function()
-    return vim.fn.getcwd()
-  end,
+  root_dir = vim.fn.getcwd(),
   -- handlers = {
   --   ["textDocument/publishDiagnostics"] = function() end,
   -- },
 }
 
 -- PYTHON: Linter and formatter
-lspconfig.ruff.setup {
+lspconfig.ruff = {
   -- disable ruff hover capabilities, since it doesn't have one
   -- but trying to hover and it throws `no information available`
   -- message
@@ -90,7 +88,7 @@ lspconfig.ruff.setup {
 }
 
 -- RUST: diagnostics, static checker, auto completion
-lspconfig.rust_analyzer.setup {
+lspconfig.rust_analyzer = {
   filetypes = { "rust" },
   on_attach = on_attach,
   on_init = on_init,
@@ -117,7 +115,7 @@ lspconfig.rust_analyzer.setup {
 }
 
 -- HTML: Abbreviation expansion
-lspconfig.emmet_language_server.setup {
+lspconfig.emmet_language_server = {
   filetypes = { "css", "html", "javascript", "javascriptreact", "typescriptreact" },
   -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
   -- **Note:** only the options listed in the table are supported.
@@ -144,14 +142,14 @@ lspconfig.emmet_language_server.setup {
 }
 
 -- TYPESCRIPT: typescript, node js auto completion, diagnostics and static checker
-lspconfig.ts_ls.setup {
+lspconfig.ts_ls = {
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
 }
 
 -- TAILWIND: tailwind css auto completion
-lspconfig.tailwindcss.setup {
+lspconfig.tailwindcss = {
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
@@ -170,14 +168,14 @@ lspconfig.tailwindcss.setup {
 }
 
 -- HTML: auto completion
-lspconfig.html.setup {
+lspconfig.html = {
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
 }
 
 -- CSS: auto completion
-lspconfig.cssls.setup {
+lspconfig.cssls = {
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
