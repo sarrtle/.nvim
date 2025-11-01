@@ -59,6 +59,7 @@ lspconfig.basedpyright = {
   --   ["textDocument/publishDiagnostics"] = function() end,
   -- },
 }
+vim.lsp.enable "basedpyright"
 
 -- PYTHON: Linter and formatter
 lspconfig.ruff = {
@@ -86,6 +87,7 @@ lspconfig.ruff = {
     },
   },
 }
+vim.lsp.enable "ruff"
 
 -- RUST: diagnostics, static checker, auto completion
 lspconfig.rust_analyzer = {
@@ -113,6 +115,7 @@ lspconfig.rust_analyzer = {
     },
   },
 }
+vim.lsp.enable "rust_analyzer"
 
 -- HTML: Abbreviation expansion
 lspconfig.emmet_language_server = {
@@ -140,6 +143,7 @@ lspconfig.emmet_language_server = {
     variables = {},
   },
 }
+vim.lsp.enable "emmet_language_server"
 
 -- TYPESCRIPT: typescript, node js auto completion, diagnostics and static checker
 lspconfig.ts_ls = {
@@ -147,6 +151,7 @@ lspconfig.ts_ls = {
   on_attach = on_attach,
   capabalities = capabalities,
 }
+vim.lsp.enable "ts_ls"
 
 -- TAILWIND: tailwind css auto completion
 lspconfig.tailwindcss = {
@@ -166,6 +171,7 @@ lspconfig.tailwindcss = {
     },
   },
 }
+vim.lsp.enable "tailwindcss"
 
 -- HTML: auto completion
 lspconfig.html = {
@@ -175,7 +181,7 @@ lspconfig.html = {
 }
 
 -- CSS: auto completion
-lspconfig.cssls = {
+lspconfig.css_ls = {
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
@@ -187,3 +193,4 @@ lspconfig.cssls = {
     },
   },
 }
+vim.lsp.enable "css_ls"
