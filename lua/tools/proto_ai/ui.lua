@@ -134,7 +134,7 @@ local main_layout_opts = {
   relative = "editor",
   size = {
     height = "100%",
-    width = "30%",
+    width = "32%",
   },
   position = {
     row = vim.o.lines,
