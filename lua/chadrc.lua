@@ -23,7 +23,8 @@ M.ui = {
     theme = "vscode",
     -- warning: Always check the order if things are updated in
     -- https://github.com/NvChad/base46/blob/v3.0/lua/base46/statusline.lua
-    order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "neocodeium", "lsp", "cursor", "cwd" },
+    -- order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "neocodeium", "lsp", "cursor", "cwd" },
+    order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cursor", "cwd" },
     modules = {
       neocodeium = function()
         return require("configs.neocodeium_config").status .. " "
@@ -45,10 +46,10 @@ M.mason = {
     "black",
     "ruff",
     -- For Web Development
-    "typescript-language-server",
-    "tailwindcss-language-server",
-    "prettierd",
-    "emmet-language-server",
+    -- "typescript-language-server",
+    -- "tailwindcss-language-server",
+    -- "prettierd",
+    -- "emmet-language-server",
     -- For Lua
     "lua-language-server",
     "stylua",
