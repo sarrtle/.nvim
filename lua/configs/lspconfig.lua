@@ -49,7 +49,7 @@ local lspconfig = vim.lsp.config
 -- }
 
 -- PYTHON: diagnostics, static checker, auto completion
-lspconfig.basedpyright = {
+lspconfig.pyright = {
   filetypes = { "python" },
   on_init = on_init,
   on_attach = on_attach,
@@ -59,7 +59,7 @@ lspconfig.basedpyright = {
   --   ["textDocument/publishDiagnostics"] = function() end,
   -- },
 }
-vim.lsp.enable "basedpyright"
+vim.lsp.enable "pyright"
 
 -- PYTHON: Linter and formatter
 lspconfig.ruff = {
@@ -118,79 +118,79 @@ lspconfig.rust_analyzer = {
 vim.lsp.enable "rust_analyzer"
 
 -- HTML: Abbreviation expansion
-lspconfig.emmet_language_server = {
-  filetypes = { "css", "html", "javascript", "javascriptreact", "typescriptreact" },
-  -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
-  -- **Note:** only the options listed in the table are supported.
-  init_options = {
-    ---@type table<string, string>
-    includeLanguages = {},
-    --- @type string[]
-    excludeLanguages = {},
-    --- @type string[]
-    extensionsPath = {},
-    --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
-    preferences = {},
-    --- @type boolean Defaults to `true`
-    showAbbreviationSuggestions = true,
-    --- @type "always" | "never" Defaults to `"always"`
-    showExpandedAbbreviation = "always",
-    --- @type boolean Defaults to `false`
-    showSuggestionsAsSnippets = false,
-    --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
-    syntaxProfiles = {},
-    --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
-    variables = {},
-  },
-}
-vim.lsp.enable "emmet_language_server"
-
--- TYPESCRIPT: typescript, node js auto completion, diagnostics and static checker
-lspconfig.ts_ls = {
-  on_init = on_init,
-  on_attach = on_attach,
-  capabalities = capabalities,
-}
-vim.lsp.enable "ts_ls"
-
--- TAILWIND: tailwind css auto completion
-lspconfig.tailwindcss = {
-  on_init = on_init,
-  on_attach = on_attach,
-  capabalities = capabalities,
-  -- remove hover capabilities because it throws `no information available`
-  handlers = {
-    ["textDocument/hover"] = function() end,
-  },
-  filetypes = { "css", "html", "javascript", "rust" },
-  settings = {
-    tailwindCSS = {
-      includeLanguages = {
-        rust = "html",
-      },
-    },
-  },
-}
-vim.lsp.enable "tailwindcss"
-
--- HTML: auto completion
-lspconfig.html = {
-  on_init = on_init,
-  on_attach = on_attach,
-  capabalities = capabalities,
-}
-
--- CSS: auto completion
-lspconfig.css_ls = {
-  on_init = on_init,
-  on_attach = on_attach,
-  capabalities = capabalities,
-  settings = {
-    css = {
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-  },
-}
-vim.lsp.enable "css_ls"
+-- lspconfig.emmet_language_server = {
+--   filetypes = { "css", "html", "javascript", "javascriptreact", "typescriptreact" },
+--   -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
+--   -- **Note:** only the options listed in the table are supported.
+--   init_options = {
+--     ---@type table<string, string>
+--     includeLanguages = {},
+--     --- @type string[]
+--     excludeLanguages = {},
+--     --- @type string[]
+--     extensionsPath = {},
+--     --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
+--     preferences = {},
+--     --- @type boolean Defaults to `true`
+--     showAbbreviationSuggestions = true,
+--     --- @type "always" | "never" Defaults to `"always"`
+--     showExpandedAbbreviation = "always",
+--     --- @type boolean Defaults to `false`
+--     showSuggestionsAsSnippets = false,
+--     --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
+--     syntaxProfiles = {},
+--     --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
+--     variables = {},
+--   },
+-- }
+-- vim.lsp.enable "emmet_language_server"
+--
+-- -- TYPESCRIPT: typescript, node js auto completion, diagnostics and static checker
+-- lspconfig.ts_ls = {
+--   on_init = on_init,
+--   on_attach = on_attach,
+--   capabalities = capabalities,
+-- }
+-- vim.lsp.enable "ts_ls"
+--
+-- -- TAILWIND: tailwind css auto completion
+-- lspconfig.tailwindcss = {
+--   on_init = on_init,
+--   on_attach = on_attach,
+--   capabalities = capabalities,
+--   -- remove hover capabilities because it throws `no information available`
+--   handlers = {
+--     ["textDocument/hover"] = function() end,
+--   },
+--   filetypes = { "css", "html", "javascript", "rust" },
+--   settings = {
+--     tailwindCSS = {
+--       includeLanguages = {
+--         rust = "html",
+--       },
+--     },
+--   },
+-- }
+-- vim.lsp.enable "tailwindcss"
+--
+-- -- HTML: auto completion
+-- lspconfig.html = {
+--   on_init = on_init,
+--   on_attach = on_attach,
+--   capabalities = capabalities,
+-- }
+--
+-- -- CSS: auto completion
+-- lspconfig.css_ls = {
+--   on_init = on_init,
+--   on_attach = on_attach,
+--   capabalities = capabalities,
+--   settings = {
+--     css = {
+--       lint = {
+--         unknownAtRules = "ignore",
+--       },
+--     },
+--   },
+-- }
+-- vim.lsp.enable "css_ls"

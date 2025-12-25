@@ -10,7 +10,7 @@ M.base46 = {
   -- by the desktop system, feel free to change it anytime — but
   -- pushing changes to the online repository will reflect your
   -- theme changes if ever you used the default theme manager
-  theme = "onedark",
+  theme = "tokyonight",
 
   -- hl_override = {
   -- Comment = { italic = true },
@@ -26,15 +26,15 @@ M.ui = {
     -- order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "neocodeium", "lsp", "cursor", "cwd" },
     order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cursor", "cwd" },
     modules = {
-      neocodeium = function()
-        return require("configs.neocodeium_config").status .. " "
-      end,
+      -- neocodeium = function()
+      --   return require("configs.neocodeium_config").status .. " "
+      -- end,
     },
   },
   cmp = {
     style = "default",
     format_colors = {
-      tailwind = true,
+      -- tailwind = true,
     },
   },
 }
@@ -44,17 +44,17 @@ M.mason = {
     -- For python
     "basedpyright",
     "black",
-    "ruff",
+    -- "ruff",
     -- For Web Development
     -- "typescript-language-server",
     -- "tailwindcss-language-server",
     -- "prettierd",
     -- "emmet-language-server",
     -- For Lua
-    "lua-language-server",
-    "stylua",
+    -- "lua-language-server",
+    -- "stylua",
     -- For rust
-    "rust-analyzer",
+    -- "rust-analyzer",
   },
 }
 

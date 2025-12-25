@@ -7,31 +7,31 @@ require "nvchad.options"
 
 -- listen to change theme server for global system theming
 -- for linux only
-if vim.loop.os_uname().sysname == "Linux" then
-  local runtime_dir = "/tmp"
-  local socket = string.format("%s/nvim-%d-theme.sock", runtime_dir, vim.fn.getpid())
-  -- remove any stale socket
-  if vim.fn.filereadable(socket) == 1 then
-    vim.fn.delete(socket)
-  end
-  vim.fn.serverstart(socket)
-  -- remove socket on nvim exit
-  vim.api.nvim_create_autocmd("VimLeave", {
-    callback = function()
-      vim.fn.delete(socket)
-    end,
-  })
-end
+-- if vim.loop.os_uname().sysname == "Linux" then
+--   local runtime_dir = "/tmp"
+--   local socket = string.format("%s/nvim-%d-theme.sock", runtime_dir, vim.fn.getpid())
+--   -- remove any stale socket
+--   if vim.fn.filereadable(socket) == 1 then
+--     vim.fn.delete(socket)
+--   end
+--   vim.fn.serverstart(socket)
+--   -- remove socket on nvim exit
+--   vim.api.nvim_create_autocmd("VimLeave", {
+--     callback = function()
+--       vim.fn.delete(socket)
+--     end,
+--   })
+-- end
 
 -- set theme base on current desktop theme
-local desktop_theme_path = vim.fn.expand "~/.desktop_theme"
-if vim.fn.filereadable(desktop_theme_path) == 1 then
-  local desktop_theme = vim.fn.readfile(desktop_theme_path)[1]
-  -- replace space into underscore
-  desktop_theme = string.gsub(desktop_theme, " ", "_")
-  require("nvconfig").base46.theme = desktop_theme
-  require("base46").load_all_highlights()
-end
+-- local desktop_theme_path = vim.fn.expand "~/.desktop_theme"
+-- if vim.fn.filereadable(desktop_theme_path) == 1 then
+--   local desktop_theme = vim.fn.readfile(desktop_theme_path)[1]
+--   -- replace space into underscore
+--   desktop_theme = string.gsub(desktop_theme, " ", "_")
+--   require("nvconfig").base46.theme = desktop_theme
+--   require("base46").load_all_highlights()
+-- end
 
 -- replace cmd to powershell and automatically activate
 -- virtual virtual enviroment of python in windows
@@ -63,17 +63,17 @@ vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
 })
 
 -- neocodeium event listeners
-require("configs.neocodeium_config").setup_listeners()
--- Automatic statusline update for supported filetypes
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    local event = require "neocodeium.events"
-    local filetypes = require("configs.neocodeium_config").filetypes
-    local current_buffer = vim.bo.filetype
-    if vim.tbl_contains(filetypes, current_buffer) then
-      event.emit "NeoCodeiumBufEnabled"
-    else
-      event.emit "NeoCodeiumBufDisabled"
-    end
-  end,
-})
+-- require("configs.neocodeium_config").setup_listeners()
+-- -- Automatic statusline update for supported filetypes
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   callback = function()
+--     local event = require "neocodeium.events"
+--     local filetypes = require("configs.neocodeium_config").filetypes
+--     local current_buffer = vim.bo.filetype
+--     if vim.tbl_contains(filetypes, current_buffer) then
+--       event.emit "NeoCodeiumBufEnabled"
+--     else
+--       event.emit "NeoCodeiumBufDisabled"
+--     end
+--   end,
+-- })

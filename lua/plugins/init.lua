@@ -110,14 +110,14 @@ return {
   },
 
   -- UI plugin
-  {
-    "MunifTanjim/nui.nvim",
-    event = "VeryLazy",
-    config = function()
-      -- load custom UI tools
-      require "tools.proto_ai"
-    end,
-  },
+  -- {
+  --   "MunifTanjim/nui.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     -- load custom UI tools
+  --     require "tools.proto_ai"
+  --   end,
+  -- },
 
   -- Allowing development inside Neovim
   -- lua_ls will have autocompletion for plugins

@@ -1,8 +1,8 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    css = { "prettierd" },
-    html = { "prettierd" },
+    -- css = { "prettierd" },
+    -- html = { "prettierd" },
     -- ruff clean up unused imports, and other might
     -- useful stuffs.
     python = { "black", "ruff" },
