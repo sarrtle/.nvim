@@ -55,9 +55,9 @@ lspconfig.pyright = {
   on_attach = on_attach,
   capabalities = capabalities,
   root_dir = vim.fn.getcwd(),
-  -- handlers = {
-  --   ["textDocument/publishDiagnostics"] = function() end,
-  -- },
+  handlers = {
+    ["textDocument/publishDiagnostics"] = function() end,
+  },
 }
 vim.lsp.enable "pyright"
 
