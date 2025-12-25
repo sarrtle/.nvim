@@ -42,7 +42,7 @@ M.ui = {
 M.mason = {
   pkgs = {
     -- For python
-    "basedpyright",
+    "pyright",
     "black",
     -- "ruff",
     -- For Web Development
