@@ -194,3 +194,12 @@ lspconfig.css_ls = {
   },
 }
 vim.lsp.enable "css_ls"
+
+-- QML
+lspconfig.qmlls = {
+  on_init = on_init,
+  on_attach = on_attach,
+  capabalities = capabalities,
+  cmd = { "qmlls6" },
+}
+vim.lsp.enable "qmlls"
