@@ -17,13 +17,6 @@
 - rust-analyzer
 - You need to install rust with **rustup** to get the rust-std.
 
-### Tools
-1. AI assistant: A prototype AI assistant builtin for this project
-- Requirements: add gemini token to your environment variable: `export GOOGLE_API_KEY=YOUR_API_KEY`
-- type `tt` in your keyboard to open the chat window
-- `td` to close the chat window
-- `tu` to navigate to the response window, `tt` for user input again, `tr` for clearing all session--you need to tap ENTER, `tl` and `th` for history navigation.
-
 ### Notes and features
 1. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Python, Rust and Web development works.
 2. **Markdown preview**: Preview markdown files with keyboard mapping of `mm` for toggle or `md` for split view.
