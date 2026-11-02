@@ -181,7 +181,7 @@ lspconfig.html = {
 }
 
 -- CSS: auto completion
-lspconfig.css_ls = {
+lspconfig.cssls = {
   on_init = on_init,
   on_attach = on_attach,
   capabalities = capabalities,
@@ -193,7 +193,7 @@ lspconfig.css_ls = {
     },
   },
 }
-vim.lsp.enable "css_ls"
+vim.lsp.enable "cssls"
 
 -- QML
 lspconfig.qmlls = {
