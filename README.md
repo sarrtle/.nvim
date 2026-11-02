@@ -16,8 +16,33 @@
 ### Rust plugins
 - rust-analyzer
 - You need to install rust with **rustup** to get the rust-std.
+### Lua plugins
+- lua-language-server, stylua
+### QML plugins
+- **qmlls**, started by this config as `qmlls6`, so **`qmlls6` must be in your `PATH`**
+- It ships with Qt 6. Mason installs the same server as plain `qmlls`, so either install Qt 6 or symlink `qmlls6` to it
+- `qmljs` is included in the treesitter parsers, and `qml` is one of the filetypes enabled for neocodeium
 
 ### Notes and features
 1. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Python, Rust and Web development works.
 2. **Markdown preview**: Preview markdown files with keyboard mapping of `mm` for toggle or `md` for split view.
-3. **AI auto suggestion**: Using `Codeium`, this config has AI auto suggestions. To start, type command `:NeoCodeium auth` to get your API key from [Codeium](https://codeium.com/).
+3. **AI auto suggestion**: Using `neocodeium`, this config has AI auto suggestions. To start, type command `:NeoCodeium auth` to get your API key from [Codeium](https://codeium.com/).
+
+### Keymaps
+| Mode | Keys | Action |
+| ---- | ---- | ------ |
+| normal | `;` | enter command mode |
+| insert | `jk` | escape to normal mode |
+| normal | `m` | toggle LSP inlay hints |
+| normal | `mm` | toggle markdown preview (markview) |
+| normal | `md` | toggle markdown split preview (markview) |
+| normal | `<C-a>` | toggle code outline (aerial) |
+| normal | `nt` | toggle code outline navigation window (aerial) |
+| insert | `<A-f>` | AI suggestion: accept |
+| insert | `<A-w>` | AI suggestion: accept word |
+| insert | `<A-a>` | AI suggestion: accept line |
+| insert | `<A-c>` | AI suggestion: clear |
+| insert | `<A-E>` / `<A-R>` | AI suggestion: cycle forward / backward |
+
+`<A-*>` are Alt combos (uppercase variants are Alt+Shift). All of these live in `lua/mappings.lua`, alongside NvChad's built-in leader mappings.
+Note: since `m` is mapped on its own, the `mm` and `md` sequences make a lone `m` wait for `timeoutlen` before it applies.
