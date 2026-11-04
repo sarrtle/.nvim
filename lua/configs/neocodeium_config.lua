@@ -3,7 +3,7 @@
 -- configs/neocodeium_config.lua
 local M = {}
 
-M.filetypes = { "lua", "python", "javascript", "typescript", "html", "css", "rust", "qml", "sh" }
+M.filetypes = { "lua", "python", "javascript", "typescript", "html", "css", "rust", "qml", "sh", "cpp" }
 
 -- State holder for statusline
 M.status = ""

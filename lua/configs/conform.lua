@@ -6,6 +6,7 @@ local options = {
     -- ruff clean up unused imports, and other might
     -- useful stuffs.
     python = { "black", "ruff" },
+    cpp = { "clang-format" },
   },
 
   format_on_save = {

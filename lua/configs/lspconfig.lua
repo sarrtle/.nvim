@@ -203,3 +203,16 @@ lspconfig.qmlls = {
   cmd = { "qmlls6" },
 }
 vim.lsp.enable "qmlls"
+
+-- C++
+lspconfig.clangd = {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--completion-style=detailed",
+    "--header-insertion=never",
+    "--inlay-hints",
+  },
+}
+vim.lsp.enable "clangd"

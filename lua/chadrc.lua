@@ -54,6 +54,9 @@ M.mason = {
     "stylua",
     -- For rust
     "rust-analyzer",
+    -- For Cpp
+    "clangd",
+    "clang-format",
   },
 }
 

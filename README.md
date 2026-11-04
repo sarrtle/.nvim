@@ -16,6 +16,12 @@
 ### Rust plugins
 - rust-analyzer
 - You need to install rust with **rustup** to get the rust-std.
+### C++ plugins
+- clangd, clang-format
+- `clangd` is started with `--clang-tidy`, so linting comes from the language server itself and follows your project's `.clang-tidy`. There is no separate `clang-tidy` package in Mason, so don't go looking for one.
+- Like every other mason package here, this puts `clangd` and `clang-format` in `~/.local/share/nvim/mason/bin`, which Mason prepends to `PATH`. Neovim therefore uses the mason copies even if you also have LLVM installed system-wide.
+- clangd needs a compilation database to resolve headers and types. For CMake projects: `cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, then symlink `build/compile_commands.json` into the project root. For anything else, a `compile_flags.txt` or a `.clangd` file works.
+- `cpp` is in the treesitter parsers, and `clang-format` is wired to the `cpp` filetype only. `.c` files need `c` added to both lists themselves if you ever write plain C.
 ### Lua plugins
 - lua-language-server, stylua
 ### QML plugins
@@ -24,7 +30,7 @@
 - `qmljs` is included in the treesitter parsers, and `qml` is one of the filetypes enabled for neocodeium
 
 ### Notes and features
-1. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Python, Rust and Web development works.
+1. **Auto formatting**: By following code writing standard, your code will be automatically clean from bad writing. Python, Rust, C++ and Web development works.
 2. **Markdown preview**: Preview markdown files with keyboard mapping of `mm` for toggle or `md` for split view.
 3. **AI auto suggestion**: Using `neocodeium`, this config has AI auto suggestions. To start, type command `:NeoCodeium auth` to get your API key from [Codeium](https://codeium.com/).
 

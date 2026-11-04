@@ -27,6 +27,7 @@ return {
         "css",
         "rust",
         "qmljs",
+        "cpp",
       },
     },
   },
